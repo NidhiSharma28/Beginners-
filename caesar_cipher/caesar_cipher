@@ -1,0 +1,57 @@
+import art
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+print(art.logo)
+direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+text = input("Type your message:\n").lower()
+shift = int(input("Type the shift number:\n"))
+shift = shift%26 # to avoid error if the user enters a shift>26
+# methods encrypt and decrypt
+def caesar(text,shift,direction): 
+  def encrypt(text,shift):
+    msg = []
+    string =""
+    for i in range(len(text)):
+      if text[i].isalpha():
+       index_of_letter = alphabet.index(text[i])
+       msg.append(alphabet[index_of_letter+shift])
+      else:
+        msg.append(text[i])
+    for i in msg:
+      string +=  i
+    print(f"Your message is successfully encoded as :{string}")
+
+  def decrypt(text,shift):
+    msg = []
+    string =""
+    for i in range(len(text)):
+      if text[i].isalpha():
+       index_of_letter = alphabet.index(text[i])
+       msg.append(alphabet[index_of_letter-shift])
+      else:
+        msg.append(text[i])
+    for i in msg:
+      string +=  i
+    print(string)
+    print(f"Your message is successfully decoded as :{string}")
+  if direction == "decode":
+    decrypt(text,shift)
+  elif direction == "encode":
+    encrypt(text,shift)
+  else:
+    print("Sorry,wrong input")
+
+
+
+caesar(text, shift, direction)
+flag = "Y"
+while flag == "Y":
+ choice = input("Do you want to decode/encode any other message y/n: ").lower()
+ if choice =="y":
+  direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+  text = input("Type your message:\n").lower()
+  shift = int(input("Type the shift number:\n")) 
+  shift = shift%26
+  caesar(text,shift,direction)
+ else:
+   flag= "N"
+   print("Thankyou!")
